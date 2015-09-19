@@ -82,5 +82,17 @@ namespace VolumeFeedback.Properties {
                 this["customfile"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string lastpath {
+            get {
+                return ((string)(this["lastpath"]));
+            }
+            set {
+                this["lastpath"] = value;
+            }
+        }
     }
 }

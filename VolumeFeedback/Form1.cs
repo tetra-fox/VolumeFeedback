@@ -1,7 +1,6 @@
 ﻿using Microsoft.Win32;
 using NAudio.CoreAudioApi;
 using System;
-using System.Diagnostics;
 using System.IO;
 using System.Media;
 using System.Threading.Tasks;
@@ -156,6 +155,8 @@ namespace VolumeFeedback
             };
 
             ofd.ShowDialog();
+            ofd.InitialDirectory = Settings.Default.lastpath;
+
             if (ofd.FileName == "")
             {
                 return;
@@ -163,7 +164,7 @@ namespace VolumeFeedback
             else
             {
                 File.Copy(ofd.FileName, customfile, true);
-
+                Settings.Default.lastpath = Path.GetDirectoryName(ofd.FileName);
                 Settings.Default.customfile = customfile;
                 Settings.Default.Save();
                 Settings.Default.Reload();

@@ -76,9 +76,11 @@ namespace VolumeFeedback
             }
             else if (radioButton3.Checked == true)
             {
-                if (customfile == null)
+                if (!Directory.Exists(customfile))
                 {
-                    MessageBox.Show("select a file first!", "error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    customfile = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Windows), @"Media\Windows Background.wav");
+                    SoundPlayer snd = new SoundPlayer(customfile);
+                    snd.Play();
                 }
                 else
                 {
@@ -117,7 +119,8 @@ namespace VolumeFeedback
             {
                 case true:
                     button1.Enabled = true;
-                    for (double i = 125; i < 160.01; i += 5)
+                    tabControl1Anim(false);
+                    for (double i = 155; i < 200.01; i += 5)
                     {
                         i = Math.Round(i, 2);
 
@@ -127,10 +130,12 @@ namespace VolumeFeedback
 
                         Height = heightint;
                     }
+
                     return;
 
                 case false:
-                    for (double i = 160; i > 124.99; i -= 5)
+                    tabControl1Anim(true);
+                    for (double i = 200; i > 155.99; i -= 5)
                     {
                         i = Math.Round(i, 2);
 
@@ -140,7 +145,41 @@ namespace VolumeFeedback
 
                         Height = heightint;
                     }
+
                     button1.Enabled = false;
+                    return;
+            }
+        }
+
+        // quick and dirty way of running code synchronously
+        private async void tabControl1Anim(bool reverse)
+        {
+            switch (reverse)
+            {
+                case false:
+                    for (double i = 100; i < 140.01; i += 5)
+                    {
+                        i = Math.Round(i, 2);
+
+                        await Task.Delay(1);
+
+                        var tabheightint = Convert.ToInt32(i);
+
+                        tabControl1.Height = tabheightint;
+                    }
+                    return;
+
+                case true:
+                    for (double i = 80; i < 100.99; i += 5)
+                    {
+                        i = Math.Round(i, 2);
+
+                        await Task.Delay(1);
+
+                        var tabheightint = Convert.ToInt32(i);
+
+                        tabControl1.Height = tabheightint;
+                    }
                     return;
             }
         }
@@ -150,7 +189,7 @@ namespace VolumeFeedback
             var ofd = new OpenFileDialog
             {
                 Filter = ".wav files|*.wav",
-                Title = "select a wav file",
+                Title = "Select a .wav file",
                 Multiselect = false
             };
 

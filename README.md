@@ -1,6 +1,9 @@
 # VolumeFeedback
 A mac-esque volume feedback.
 
+# Notes
+ * Verified to work on **Windows 7** and up.
+
 # How to Use
 
 1. [Extract .zip file] (https://github.com/Syrexide/VolumeFeedback/releases/latest)

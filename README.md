@@ -9,7 +9,7 @@ A mac-esque volume feedback tool.
 
 # How to Use
 
-1. [Extract .zip file] (https://github.com/Syrexide/VolumeFeedback/releases/latest)
+1. [Download the .msi installer file] (https://github.com/Syrexide/VolumeFeedback/releases/latest)
 2. Open **VolumeFeedback.exe**
 3. Configure
 4. ???

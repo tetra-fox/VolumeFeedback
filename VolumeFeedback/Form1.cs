@@ -267,11 +267,24 @@ namespace VolumeFeedback
             switch (checkBox2.Checked)
             {
                 case true:
-                    rk.SetValue("VolumeFeedback", Application.ExecutablePath.ToString());
+                    if (!Debugger.IsAttached)
+                    {
+                        rk.SetValue("VolumeFeedback", Application.ExecutablePath.ToString());
+                    } else
+                    {
+                        MessageBox.Show("This application will not be added to startup because the application is debugging.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
                     break;
 
                 case false:
-                    rk.DeleteValue("VolumeFeedback", false);
+                    if (!Debugger.IsAttached)
+                    {
+                        rk.DeleteValue("VolumeFeedback", false);
+                    }
+                    else
+                    {
+                        MessageBox.Show("This application will not be removed from startup because the application is debugging.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
                     break;
             }
         }

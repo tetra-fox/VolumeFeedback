@@ -1,13 +1,14 @@
 ﻿using Microsoft.Win32;
 using NAudio.CoreAudioApi;
 using System;
+using System.Diagnostics;
 using System.IO;
 using System.Media;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using VolumeFeedback.Properties;
 
-namespace VolumeFeedback
+//namespace VolumeFeedback
 {
     public partial class Form1 : Form
     {
@@ -151,7 +152,6 @@ namespace VolumeFeedback
             }
         }
 
-        // quick and dirty way of running code synchronously
         private async void tabControl1Anim(bool reverse)
         {
             switch (reverse)
@@ -274,6 +274,14 @@ namespace VolumeFeedback
                     rk.DeleteValue("VolumeFeedback", false);
                     break;
             }
+        }
+
+        private async void button2_Click(object sender, EventArgs e)
+        {
+            Settings.Default.Reset();
+            Settings.Default.Reload();
+            Process.Start(Application.ExecutablePath);
+            Environment.Exit(0);
         }
     }
 }

@@ -3,7 +3,7 @@ A mac-esque volume feedback tool.
 
 [![Join the chat at https://gitter.im/Syrexide/VolumeFeedback](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/Syrexide/VolumeFeedback?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
-[![Build status](https://ci.appveyor.com/api/projects/status/jujskkn92epc3a4h?svg=true)](https://ci.appveyor.com/project/Syrexide/volumefeedback) ![Language](https://img.shields.io/badge/language-C%23-brightgreen.svg) ![License](https://img.shields.io/github/license/mashape/apistatus.svg)
+[![Build status](https://ci.appveyor.com/api/projects/status/jujskkn92epc3a4h?svg=true)](https://ci.appveyor.com/project/Syrexide/volumefeedback) ![Language](https://img.shields.io/badge/language-C%23-178600.svg) ![License](https://img.shields.io/github/license/mashape/apistatus.svg)
 # Notes
  * Verified to work on **Windows 7** and up.
 

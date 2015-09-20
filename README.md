@@ -1,5 +1,5 @@
 # VolumeFeedback
-A mac-esque volume feedback.
+A mac-esque volume feedback tool.
 
 [![Join the chat at https://gitter.im/Syrexide/VolumeFeedback](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/Syrexide/VolumeFeedback?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 

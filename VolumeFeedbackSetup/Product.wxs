@@ -16,13 +16,14 @@
       <Publish Dialog="ExitDialog" Control="Finish" Event="DoAction" Value="LaunchApplication">WIXUI_EXITDIALOGOPTIONALCHECKBOX = 1 and NOT Installed</Publish>
     </UI>
 
-    <Property Id="WIXUI_EXITDIALOGOPTIONALCHECKBOXTEXT" Value="Launch VolumeFeedback" />
+    <Property Id="WIXUI_EXITDIALOGOPTIONALCHECKBOXTEXT" Value="Launch VolumeFeedback"/>
 
     <Property Id="WixShellExecTarget" Value="[#VolumeFeedback.exe]" />
     <CustomAction Id="LaunchApplication" BinaryKey="WixCA" DllEntry="WixShellExec" Impersonate="yes" />
 
     <MajorUpgrade DowngradeErrorMessage="A newer version of VolumeFeedback is already installed." />
-    <MediaTemplate />
+    
+    <MediaTemplate EmbedCab="yes" />
 
     <Feature Id="ProductFeature" Title="VolumeFeedback" Level="1">
       <ComponentGroupRef Id="ProductComponents" />

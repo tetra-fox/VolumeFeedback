@@ -270,7 +270,8 @@ namespace VolumeFeedback
                     if (!Debugger.IsAttached)
                     {
                         rk.SetValue("VolumeFeedback", Application.ExecutablePath.ToString());
-                    } else
+                    }
+                    else
                     {
                         MessageBox.Show("This application will not be added to startup because the application is debugging.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+  <Product Id="*" Name="VolumeFeedback" Language="1033" Version="1.1" Manufacturer="Syrexide" UpgradeCode="f644f313-0c46-4380-af00-6db8039de806">
+    <Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" />
+
+    <Icon Id="VFeedbk.ico" SourceFile="..\VolumeFeedback\VFeedbk.ico" />
+    <Property Id="ARPPRODUCTICON" Value="VFeedbk.ico" />
+    <Property Id="ARPCONTACT" Value="https://syrexide.com" />
+
+    <Property Id="WIXUI_INSTALLDIR" Value="INSTALLFOLDER" />
+    <UI>
+
+      <UIRef Id="WixUI_InstallDir" />
+      <Publish Dialog="WelcomeDlg" Control="Next" Event="NewDialog" Value="InstallDirDlg" Order="2">1</Publish>
+      <Publish Dialog="InstallDirDlg" Control="Back" Event="NewDialog" Value="WelcomeDlg" Order="2">1</Publish>
+      <Publish Dialog="ExitDialog" Control="Finish" Event="DoAction" Value="LaunchApplication">WIXUI_EXITDIALOGOPTIONALCHECKBOX = 1 and NOT Installed</Publish>
+    </UI>
+
+    <Property Id="WIXUI_EXITDIALOGOPTIONALCHECKBOXTEXT" Value="Launch VolumeFeedback" />
+
+    <Property Id="WixShellExecTarget" Value="[#VolumeFeedback.exe]" />
+    <CustomAction Id="LaunchApplication" BinaryKey="WixCA" DllEntry="WixShellExec" Impersonate="yes" />
+
+    <MajorUpgrade DowngradeErrorMessage="A newer version of VolumeFeedback is already installed." />
+    <MediaTemplate />
+
+    <Feature Id="ProductFeature" Title="VolumeFeedback" Level="1">
+      <ComponentGroupRef Id="ProductComponents" />
+    </Feature>
+  </Product>
+
+  <Fragment>
+    <Directory Id="TARGETDIR" Name="SourceDir">
+      <Directory Id="ProgramFilesFolder">
+        <Directory Id="INSTALLFOLDER" Name="VolumeFeedback" />
+      </Directory>
+    </Directory>
+  </Fragment>
+
+  <Fragment>
+    <ComponentGroup Id="ProductComponents" Directory="INSTALLFOLDER">
+      <Component Id="VolumeFeedback.exe" Guid="4EC56E26-F28F-403C-88F2-80989D65EA1E">
+        <File Id="VolumeFeedback.exe" Source="..\VolumeFeedback\bin\Release\VolumeFeedback.exe" KeyPath="yes" Checksum="yes" />
+      </Component>
+
+      <Component Id="NAudio.dll" Guid="8D5B37DA-1C40-460B-A7A9-F7AA0878C07B">
+        <File Id="NAudio.dll" Source="..\VolumeFeedback\bin\Release\NAudio.dll" KeyPath="yes" Checksum="yes" />
+      </Component>
+    </ComponentGroup>
+  </Fragment>
+</Wix>

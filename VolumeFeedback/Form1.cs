@@ -276,7 +276,7 @@ namespace VolumeFeedback
             }
         }
 
-        private async void button2_Click(object sender, EventArgs e)
+        private void button2_Click(object sender, EventArgs e)
         {
             Settings.Default.Reset();
             Settings.Default.Reload();

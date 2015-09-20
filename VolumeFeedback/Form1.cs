@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using VolumeFeedback.Properties;
 
-//namespace VolumeFeedback
+namespace VolumeFeedback
 {
     public partial class Form1 : Form
     {

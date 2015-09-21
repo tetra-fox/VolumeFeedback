@@ -3,7 +3,9 @@ using NAudio.CoreAudioApi;
 using System;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Media;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using VolumeFeedback.Properties;
@@ -44,7 +46,7 @@ namespace VolumeFeedback
             if (Settings.Default.silentstart == true)
             {
                 checkBox1.Checked = true;
-                DelayedHide();
+                Application.Exit();
             }
             if (rk.GetValue("VolumeFeedback") == null)
             {
@@ -62,14 +64,6 @@ namespace VolumeFeedback
             {
                 File.Copy(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Windows), @"Media\Windows Background.wav"), Path.Combine(datapath, "custom.wav"));
             }
-        }
-
-        private async void DelayedHide()
-        {
-            await Task.Delay(1);
-            Hide();
-            notifyIcon1.Visible = true;
-            ShowInTaskbar = false;
         }
 
         private void AudioEndpointVolume_OnVolumeNotification(AudioVolumeNotificationData data)
@@ -217,11 +211,11 @@ namespace VolumeFeedback
                     Show();
                     notifyIcon1.Visible = false;
                     ShowInTaskbar = true;
-                    break;
+                    return;
 
                 case MouseButtons.Right:
                     contextMenuStrip1.Show(MousePosition);
-                    break;
+                    return;
             }
         }
 
@@ -244,12 +238,12 @@ namespace VolumeFeedback
                 case true:
                     Settings.Default.silentstart = true;
                     Settings.Default.Save();
-                    break;
+                    return;
 
                 case false:
                     Settings.Default.silentstart = false;
                     Settings.Default.Save();
-                    break;
+                    return;
             }
         }
 
@@ -266,7 +260,7 @@ namespace VolumeFeedback
                     {
                         MessageBox.Show("This application will not be added to startup because the application is debugging.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
-                    break;
+                    return;
 
                 case false:
                     if (!Debugger.IsAttached)
@@ -277,15 +271,13 @@ namespace VolumeFeedback
                     {
                         MessageBox.Show("This application will not be removed from startup because the application is debugging.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
-                    break;
+                    return;
             }
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
             DialogResult confirm = MessageBox.Show("Are you sure you want to reset ALL settings?", "Are you sure?", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-
-            
 
             switch (confirm)
             {
@@ -297,11 +289,11 @@ namespace VolumeFeedback
                         File.Delete(customfile);
                     }
                     Process.Start(Application.ExecutablePath);
-                    Environment.Exit(0);
-                    break;
+                    Application.ExitThread();
+                    return;
 
                 case DialogResult.No:
-                    break;
+                    return;
             }
         }
     }

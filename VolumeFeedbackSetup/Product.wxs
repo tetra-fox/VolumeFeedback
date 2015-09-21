@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
-  <Product Id="*" Name="VolumeFeedback" Language="1033" Version="1.1" Manufacturer="Syrexide" UpgradeCode="f644f313-0c46-4380-af00-6db8039de806">
+  <Product Id="*" Name="VolumeFeedback" Language="1033" Version="1.1.1" Manufacturer="Syrexide" UpgradeCode="f644f313-0c46-4380-af00-6db8039de806">
     <Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" />
 
     <Icon Id="VFeedbk.ico" SourceFile="..\VolumeFeedback\VFeedbk.ico" />

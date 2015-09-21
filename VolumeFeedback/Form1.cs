@@ -54,9 +54,13 @@ namespace VolumeFeedback
             {
                 checkBox2.Checked = true;
             }
-            if (!Directory.Exists(datapath))
+            if (!File.Exists(datapath))
             {
                 Directory.CreateDirectory(datapath);
+            }
+            if (!File.Exists(customfile))
+            {
+                File.Copy(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Windows), @"Media\Windows Background.wav"), Path.Combine(datapath, "custom.wav"));
             }
         }
 
@@ -77,17 +81,8 @@ namespace VolumeFeedback
             }
             else if (radioButton3.Checked == true)
             {
-                if (!Directory.Exists(customfile))
-                {
-                    customfile = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Windows), @"Media\Windows Background.wav");
-                    SoundPlayer snd = new SoundPlayer(customfile);
-                    snd.Play();
-                }
-                else
-                {
-                    SoundPlayer snd = new SoundPlayer(customfile);
-                    snd.Play();
-                }
+                SoundPlayer snd = new SoundPlayer(customfile);
+                snd.Play();
             }
             else
             {
@@ -196,11 +191,7 @@ namespace VolumeFeedback
             ofd.ShowDialog();
             ofd.InitialDirectory = Settings.Default.lastpath;
 
-            if (ofd.FileName == "")
-            {
-                return;
-            }
-            else
+            if (ofd.FileName != "")
             {
                 File.Copy(ofd.FileName, customfile, true);
                 Settings.Default.lastpath = Path.GetDirectoryName(ofd.FileName);
@@ -292,10 +283,26 @@ namespace VolumeFeedback
 
         private void button2_Click(object sender, EventArgs e)
         {
-            Settings.Default.Reset();
-            Settings.Default.Reload();
-            Process.Start(Application.ExecutablePath);
-            Environment.Exit(0);
+            DialogResult confirm = MessageBox.Show("Are you sure you want to reset ALL settings?", "Are you sure?", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+
+            
+
+            switch (confirm)
+            {
+                case DialogResult.Yes:
+                    Settings.Default.Reset();
+                    Settings.Default.Reload();
+                    if (File.Exists(customfile))
+                    {
+                        File.Delete(customfile);
+                    }
+                    Process.Start(Application.ExecutablePath);
+                    Environment.Exit(0);
+                    break;
+
+                case DialogResult.No:
+                    break;
+            }
         }
     }
 }

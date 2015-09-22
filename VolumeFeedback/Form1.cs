@@ -3,9 +3,7 @@ using NAudio.CoreAudioApi;
 using System;
 using System.Diagnostics;
 using System.IO;
-using System.Linq;
 using System.Media;
-using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using VolumeFeedback.Properties;
@@ -47,6 +45,11 @@ namespace VolumeFeedback
             {
                 checkBox1.Checked = true;
                 Application.Exit();
+            }
+            if (Settings.Default.silentstart == false && checkBox1.Checked == false)
+            {
+                Settings.Default.silentstart = true;
+                checkBox1.Checked = true;
             }
             if (rk.GetValue("VolumeFeedback") == null)
             {
@@ -189,7 +192,6 @@ namespace VolumeFeedback
             {
                 File.Copy(ofd.FileName, customfile, true);
                 Settings.Default.lastpath = Path.GetDirectoryName(ofd.FileName);
-                Settings.Default.customfile = customfile;
                 Settings.Default.Save();
                 Settings.Default.Reload();
             }
@@ -282,14 +284,16 @@ namespace VolumeFeedback
             switch (confirm)
             {
                 case DialogResult.Yes:
-                    Settings.Default.Reset();
-                    Settings.Default.Reload();
+                    Settings.Default.lastpath = "";
+                    Settings.Default.silentstart = false;
+                    checkBox1.Checked = true;
+                    checkBox2.Checked = true;
+                    radioButton2.Checked = true;
                     if (File.Exists(customfile))
                     {
                         File.Delete(customfile);
+                        File.Copy(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Windows), @"Media\Windows Background.wav"), Path.Combine(datapath, "custom.wav"));
                     }
-                    Process.Start(Application.ExecutablePath);
-                    Application.ExitThread();
                     return;
 
                 case DialogResult.No:

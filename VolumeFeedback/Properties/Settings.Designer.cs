@@ -25,18 +25,6 @@ namespace VolumeFeedback.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool vol {
-            get {
-                return ((bool)(this["vol"]));
-            }
-            set {
-                this["vol"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("True")]
         public bool newvol {
             get {
@@ -68,18 +56,6 @@ namespace VolumeFeedback.Properties {
             }
             set {
                 this["silentstart"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string customfile {
-            get {
-                return ((string)(this["customfile"]));
-            }
-            set {
-                this["customfile"] = value;
             }
         }
         

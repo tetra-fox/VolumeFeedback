@@ -19,4 +19,4 @@ A mac-esque volume feedback tool.
 # Screenshot & Demo Video
 
 ![the one and only screenshot](http://puu.sh/kiA1L/93b0d4e2d6.png)
-<a href="http://www.youtube.com/watch?feature=player_embedded&v=g-mp_hSxGhI" target="_blank"><img src="http://img.youtube.com/vi/g-mp_hSxGhI/0.jpg" alt="Demo Video" width="240" height="180" border="10" /></a>
+<a href="http://www.youtube.com/watch?feature=player_embedded&v=IrPXOLMiMlU" target="_blank"><img src="http://img.youtube.com/vi/IrPXOLMiMlU/0.jpg" alt="Demo Video" width="240" height="180" border="10" /></a>

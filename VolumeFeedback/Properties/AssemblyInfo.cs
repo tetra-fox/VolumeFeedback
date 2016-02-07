@@ -8,9 +8,9 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("VolumeFeedback")]
 [assembly: AssemblyDescription("A mac-esque volume feedback tool.")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Syrexide")]
+[assembly: AssemblyCompany("wc1202")]
 [assembly: AssemblyProduct("VolumeFeedback")]
-[assembly: AssemblyCopyright("Copyright © Syrexide 2015")]
+[assembly: AssemblyCopyright("Copyright © wc1202 2015")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

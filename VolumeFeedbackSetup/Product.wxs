@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
-  <Product Id="*" Name="VolumeFeedback" Language="1033" Version="1.1.3" Manufacturer="Syrexide" UpgradeCode="f644f313-0c46-4380-af00-6db8039de806">
+  <Product Id="*" Name="VolumeFeedback" Language="1033" Version="1.1.4" Manufacturer="wc1202" UpgradeCode="f644f313-0c46-4380-af00-6db8039de806">
     <Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" />
 
     <Icon Id="VFeedbk.ico" SourceFile="..\VolumeFeedback\VFeedbk.ico" />
     <Property Id="ARPPRODUCTICON" Value="VFeedbk.ico" />
-    <Property Id="ARPCONTACT" Value="https://syrexide.com" />
 
     <Property Id="WIXUI_INSTALLDIR" Value="INSTALLFOLDER" />
     <UI>
@@ -40,11 +39,10 @@
 
   <Fragment>
     <ComponentGroup Id="ProductComponents" Directory="INSTALLFOLDER">
-      <Component Id="VolumeFeedback.exe" Guid="4EC56E26-F28F-403C-88F2-80989D65EA1E">
+      <Component Id="VolumeFeedback.exe" Guid="06DF5ACA-BA9D-47BC-BB3C-CCAC923C2D6D">
         <File Id="VolumeFeedback.exe" Source="..\VolumeFeedback\bin\Release\VolumeFeedback.exe" KeyPath="yes" Checksum="yes" />
       </Component>
-
-      <Component Id="NAudio.dll" Guid="8D5B37DA-1C40-460B-A7A9-F7AA0878C07B">
+          <Component Id="NAudio.dll" Guid="C93CD2F6-A8EB-46D1-AD4C-979E11D6460F">
         <File Id="NAudio.dll" Source="..\VolumeFeedback\bin\Release\NAudio.dll" KeyPath="yes" Checksum="yes" />
       </Component>
     </ComponentGroup>

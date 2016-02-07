@@ -4,6 +4,7 @@ using System;
 using System.Diagnostics;
 using System.IO;
 using System.Media;
+using System.Reflection;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using VolumeFeedback.Properties;
@@ -15,8 +16,6 @@ namespace VolumeFeedback
         private static MMDeviceEnumerator enumerator = new MMDeviceEnumerator();
         private MMDevice device = enumerator.GetDefaultAudioEndpoint(DataFlow.Render, Role.Multimedia);
 
-        private bool volumenew = Settings.Default.newvol;
-        private bool custom = Settings.Default.custom;
         private static string datapath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), @"VolumeFeedback\Data");
         private string customfile = Path.Combine(datapath, "custom.wav");
 
@@ -28,11 +27,12 @@ namespace VolumeFeedback
             FormClosing += Form1_FormClosing;
             notifyIcon1.MouseUp += notifyIcon1_MouseUp;
             device.AudioEndpointVolume.OnVolumeNotification += AudioEndpointVolume_OnVolumeNotification;
-            if (volumenew == true)
+
+            if (Settings.Default.newvol == true)
             {
                 radioButton2.Checked = true;
             }
-            else if (custom == true)
+            else if (Settings.Default.custom == true)
             {
                 radioButton3.Checked = true;
             }
@@ -44,12 +44,16 @@ namespace VolumeFeedback
             if (Settings.Default.silentstart == true)
             {
                 checkBox1.Checked = true;
-                Application.Exit();
+                Hide();
+                notifyIcon1.Visible = true;
+                ShowInTaskbar = false;
             }
-            if (Settings.Default.silentstart == false && checkBox1.Checked == false)
+            else
             {
-                Settings.Default.silentstart = true;
-                checkBox1.Checked = true;
+                checkBox1.Checked = false;
+                Show();
+                notifyIcon1.Visible = false;
+                ShowInTaskbar = true;
             }
             if (rk.GetValue("VolumeFeedback") == null)
             {
@@ -69,9 +73,11 @@ namespace VolumeFeedback
             }
         }
 
+        // play sounds
+
         private void AudioEndpointVolume_OnVolumeNotification(AudioVolumeNotificationData data)
         {
-            if (volumenew == true)
+            if (Settings.Default.newvol == true)
             {
                 SoundPlayer snd = new SoundPlayer(Properties.Resources.volumenew);
                 snd.Play();
@@ -92,22 +98,34 @@ namespace VolumeFeedback
         {
             Settings.Default.newvol = false;
             Settings.Default.Save();
-            volumenew = false;
+            originalToolStripMenuItem.Checked = true;
+            yosemiteToolStripMenuItem.Checked = false;
+            customToolStripMenuItem.Checked = false;
+            chooseFileToolStripMenuItem.Enabled = false;
         }
 
         private void radioButton2_CheckedChanged(object sender, EventArgs e)
         {
             Settings.Default.newvol = true;
             Settings.Default.Save();
-            volumenew = true;
+            originalToolStripMenuItem.Checked = false;
+            yosemiteToolStripMenuItem.Checked = true;
+            customToolStripMenuItem.Checked = false;
+            chooseFileToolStripMenuItem.Enabled = false;
         }
 
         private async void radioButton3_CheckedChanged(object sender, EventArgs e)
         {
-            volumenew = false;
+            Settings.Default.newvol = false;
             Settings.Default.newvol = false;
             Settings.Default.custom = true;
             Settings.Default.Save();
+
+            originalToolStripMenuItem.Checked = false;
+            yosemiteToolStripMenuItem.Checked = false;
+            customToolStripMenuItem.Checked = true;
+            chooseFileToolStripMenuItem.Enabled = true;
+
             switch (radioButton3.Checked)
             {
                 case true:
@@ -216,7 +234,8 @@ namespace VolumeFeedback
                     return;
 
                 case MouseButtons.Right:
-                    contextMenuStrip1.Show(MousePosition);
+                    MethodInfo mi = typeof(NotifyIcon).GetMethod("ShowContextMenu", BindingFlags.Instance | BindingFlags.NonPublic);
+                    mi.Invoke(notifyIcon1, null);
                     return;
             }
         }
@@ -258,20 +277,12 @@ namespace VolumeFeedback
                     {
                         rk.SetValue("VolumeFeedback", Application.ExecutablePath.ToString());
                     }
-                    else
-                    {
-                        MessageBox.Show("This application will not be added to startup because the application is debugging.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    }
                     return;
 
                 case false:
                     if (!Debugger.IsAttached)
                     {
                         rk.DeleteValue("VolumeFeedback", false);
-                    }
-                    else
-                    {
-                        MessageBox.Show("This application will not be removed from startup because the application is debugging.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                     return;
             }
@@ -285,7 +296,7 @@ namespace VolumeFeedback
             {
                 case DialogResult.Yes:
                     Settings.Default.lastpath = "";
-                    Settings.Default.silentstart = false;
+                    Settings.Default.silentstart = true;
                     checkBox1.Checked = true;
                     checkBox2.Checked = true;
                     radioButton2.Checked = true;
@@ -299,6 +310,30 @@ namespace VolumeFeedback
                 case DialogResult.No:
                     return;
             }
+        }
+
+        private void chooseFileToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Show();
+            button1.PerformClick();
+        }
+
+        private void customToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            radioButton3.Select();
+            chooseFileToolStripMenuItem.Enabled = true;
+        }
+
+        private void yosemiteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            radioButton2.Select();
+            chooseFileToolStripMenuItem.Enabled = false;
+        }
+
+        private void originalToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            radioButton1.Select();
+            chooseFileToolStripMenuItem.Enabled = false;
         }
     }
 }

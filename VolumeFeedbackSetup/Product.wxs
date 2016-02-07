@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
-  <Product Id="*" Name="VolumeFeedback" Language="1033" Version="1.1.4" Manufacturer="wc1202" UpgradeCode="f644f313-0c46-4380-af00-6db8039de806">
+  <Product Id="*" Name="VolumeFeedback" Language="1033" Version="1.1.4" Manufacturer="wc1202" UpgradeCode="1DC5F27B-2EF6-4A67-AE4A-F429C9D8A2B8">
     <Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" />
 
     <Icon Id="VFeedbk.ico" SourceFile="..\VolumeFeedback\VFeedbk.ico" />
@@ -15,13 +15,13 @@
       <Publish Dialog="ExitDialog" Control="Finish" Event="DoAction" Value="LaunchApplication">WIXUI_EXITDIALOGOPTIONALCHECKBOX = 1 and NOT Installed</Publish>
     </UI>
 
-    <Property Id="WIXUI_EXITDIALOGOPTIONALCHECKBOXTEXT" Value="Launch VolumeFeedback"/>
+    <Property Id="WIXUI_EXITDIALOGOPTIONALCHECKBOXTEXT" Value="Launch VolumeFeedback" />
 
     <Property Id="WixShellExecTarget" Value="[#VolumeFeedback.exe]" />
     <CustomAction Id="LaunchApplication" BinaryKey="WixCA" DllEntry="WixShellExec" Impersonate="yes" />
 
     <MajorUpgrade DowngradeErrorMessage="A newer version of VolumeFeedback is already installed." />
-    
+
     <MediaTemplate EmbedCab="yes" />
 
     <Feature Id="ProductFeature" Title="VolumeFeedback" Level="1">
@@ -40,10 +40,10 @@
   <Fragment>
     <ComponentGroup Id="ProductComponents" Directory="INSTALLFOLDER">
       <Component Id="VolumeFeedback.exe" Guid="06DF5ACA-BA9D-47BC-BB3C-CCAC923C2D6D">
-        <File Id="VolumeFeedback.exe" Source="..\VolumeFeedback\bin\Release\VolumeFeedback.exe" KeyPath="yes" Checksum="yes" />
+        <File Id="VolumeFeedback.exe" Source="..\VolumeFeedback\bin\Debug\VolumeFeedback.exe" KeyPath="yes" Checksum="yes" />
       </Component>
-          <Component Id="NAudio.dll" Guid="C93CD2F6-A8EB-46D1-AD4C-979E11D6460F">
-        <File Id="NAudio.dll" Source="..\VolumeFeedback\bin\Release\NAudio.dll" KeyPath="yes" Checksum="yes" />
+      <Component Id="NAudio.dll" Guid="C93CD2F6-A8EB-46D1-AD4C-979E11D6460F">
+        <File Id="NAudio.dll" Source="..\VolumeFeedback\bin\Debug\NAudio.dll" KeyPath="yes" Checksum="yes" />
       </Component>
     </ComponentGroup>
   </Fragment>

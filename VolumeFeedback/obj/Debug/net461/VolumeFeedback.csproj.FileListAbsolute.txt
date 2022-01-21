@@ -1,6 +1,0 @@
-C:\Users\tetra\Documents\Git\VolumeFeedback\VolumeFeedback\obj\Debug\net461\VolumeFeedback.csproj.AssemblyReference.cache
-C:\Users\tetra\Documents\Git\VolumeFeedback\VolumeFeedback\obj\Debug\net461\VolumeFeedback.exe.config
-C:\Users\tetra\Documents\Git\VolumeFeedback\VolumeFeedback\obj\Debug\net461\VolumeFeedback.GeneratedMSBuildEditorConfig.editorconfig
-C:\Users\tetra\Documents\Git\VolumeFeedback\VolumeFeedback\obj\Debug\net461\VolumeFeedback.AssemblyInfoInputs.cache
-C:\Users\tetra\Documents\Git\VolumeFeedback\VolumeFeedback\obj\Debug\net461\VolumeFeedback.AssemblyInfo.cs
-C:\Users\tetra\Documents\Git\VolumeFeedback\VolumeFeedback\obj\Debug\net461\VolumeFeedback.csproj.CoreCompileInputs.cache

@@ -1,20 +1,27 @@
-﻿using System;
-using System.Windows.Forms;
+﻿using Avalonia;
+using Avalonia.Controls;
+using Avalonia.Interactivity;
+using Avalonia.Markup.Xaml;
 
 namespace VolumeFeedback
 {
-    internal static class Program
-    {
-        /// <summary>
-        /// The main entry point for the application.
-        /// </summary>
-        [STAThread]
-        private static void Main()
-        {
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
-            Form1 mainForm = new Form1();
-            Application.Run();
-        }
-    }
+	public class MainWindow : Window
+	{
+		public MainWindow()
+		{
+			this.InitializeComponent();
+		}
+
+		public void button_Click(object sender, RoutedEventArgs e)
+		{
+			// Change button text when button is clicked.
+			Button button = (Button)sender;
+			button.Content = "Hello, Avalonia!";
+		}
+
+		private void InitializeComponent()
+		{
+			AvaloniaXamlLoader.Load(this);
+		}
+	}
 }

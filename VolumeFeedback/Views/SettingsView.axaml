@@ -1,0 +1,33 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="clr-namespace:VolumeFeedback.ViewModels"
+             xmlns:base="clr-namespace:VolumeFeedback.Enums"
+             xmlns:converters="clr-namespace:VolumeFeedback.Converters"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="VolumeFeedback.Views.SettingsView"
+             DataContext="">
+
+    <UserControl.Resources>
+        <converters:EnumToBooleanConverter x:Key="EnumToBooleanConverter" />
+    </UserControl.Resources>
+    
+    <Design.DataContext>
+        <vm:SettingsViewModel/>
+    </Design.DataContext>
+        
+    <!-- actual controls -->
+    <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+            <RadioButton Content="old (OSX &lt;= 10.9)" IsChecked="{Binding Settings.SoundSetting, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static base:Sound.Old}}"/>
+            <RadioButton Content="new (macOS &gt;= 10.10)" IsChecked="{Binding Settings.SoundSetting, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static base:Sound.New}}"/>
+            <RadioButton Content="custom" Name="CustomFileRadioButton" IsChecked="{Binding Settings.SoundSetting, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static base:Sound.Custom}}"/>
+            <Button HorizontalAlignment="Center" Click="Button_OpenFile_Click" Content="open file..." IsVisible="{Binding #CustomFileRadioButton.IsChecked}"/>
+            <!-- <Button.Transitions> -->
+            <!--     <Transitions> -->
+            <!--         <TransformOperationsTransition Property="RenderTransform" Duration="0:0:1"/> -->
+            <!--     </Transitions> -->
+            <!-- </Button.Transitions> -->
+    </StackPanel>
+    
+</UserControl>

@@ -1,0 +1,21 @@
+<Application xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="using:VolumeFeedback"
+             x:Class="VolumeFeedback.App">
+    <Application.DataTemplates>
+        <local:ViewLocator/>
+    </Application.DataTemplates>
+
+    <Application.Styles>
+        <FluentTheme Mode="Dark"/>
+    </Application.Styles>
+    
+    <!-- tray icon -->
+    <TrayIcon.Icons>
+        <TrayIcons>
+            <TrayIcon Icon="/Assets/VFeedbk.ico" ToolTipText="VolumeFeedback">
+            </TrayIcon>
+        </TrayIcons>
+    </TrayIcon.Icons>
+    
+</Application>

@@ -1,27 +1,22 @@
-﻿using Avalonia;
-using Avalonia.Controls;
-using Avalonia.Interactivity;
-using Avalonia.Markup.Xaml;
+﻿using System;
+using Avalonia;
+using Avalonia.ReactiveUI;
 
-namespace VolumeFeedback
+namespace VolumeFeedback;
+
+internal static class Program
 {
-	public class MainWindow : Window
-	{
-		public MainWindow()
-		{
-			this.InitializeComponent();
-		}
+    // Initialization code. Don't use any Avalonia, third-party APIs or any
+    // SynchronizationContext-reliant code before AppMain is called: things aren't initialized
+    // yet and stuff might break.
+    [STAThread]
+    public static void Main(string[] args) => BuildAvaloniaApp()
+        .StartWithClassicDesktopLifetime(args);
 
-		public void button_Click(object sender, RoutedEventArgs e)
-		{
-			// Change button text when button is clicked.
-			Button button = (Button)sender;
-			button.Content = "Hello, Avalonia!";
-		}
-
-		private void InitializeComponent()
-		{
-			AvaloniaXamlLoader.Load(this);
-		}
-	}
+    // Avalonia configuration, don't remove; also used by visual designer.
+    private static AppBuilder BuildAvaloniaApp()
+        => AppBuilder.Configure<App>()
+            .UsePlatformDetect()
+            .LogToTrace()
+            .UseReactiveUI();
 }
